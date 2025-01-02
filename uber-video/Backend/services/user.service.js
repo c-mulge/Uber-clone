@@ -8,7 +8,7 @@ module.exports.createUser = async({
     }
     const user = userModel.create({
         fullname: {
-            fisrtname,
+            firstname,
             lastname
         },
         email,
