@@ -153,3 +153,80 @@ The request body should be a JSON object containing the following fields:
     "message": "Invalid email or password"
   }
   ```
+
+# User Profile Endpoint
+
+## GET /users/profile
+
+### Description
+This endpoint is used to get the profile of the logged-in user.
+
+### Headers
+- `Authorization` (string, required): The JWT token of the logged-in user.
+
+### Example Request
+```
+GET /users/profile
+Authorization: Bearer jwt-token
+```
+
+### Responses
+
+#### Success
+- **Status Code**: 200 OK
+- **Response Body**:
+  ```json
+  {
+    "_id": "user-id",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "john.doe@example.com"
+  }
+  ```
+
+#### Unauthorized
+- **Status Code**: 401 Unauthorized
+- **Response Body**:
+  ```json
+  {
+    "message": "Unauthorized"
+  }
+  ```
+
+# User Logout Endpoint
+
+## GET /users/logout
+
+### Description
+This endpoint is used to log out the logged-in user.
+
+### Headers
+- `Authorization` (string, required): The JWT token of the logged-in user.
+
+### Example Request
+```
+GET /users/logout
+Authorization: Bearer jwt-token
+```
+
+### Responses
+
+#### Success
+- **Status Code**: 200 OK
+- **Response Body**:
+  ```json
+  {
+    "message": "Logged out successfully"
+  }
+  ```
+
+#### Unauthorized
+- **Status Code**: 401 Unauthorized
+- **Response Body**:
+  ```json
+  {
+    "message": "Unauthorized"
+  }
+  ```
