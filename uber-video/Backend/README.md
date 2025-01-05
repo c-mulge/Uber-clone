@@ -230,3 +230,121 @@ Authorization: Bearer jwt-token
     "message": "Unauthorized"
   }
   ```
+
+# Captain Registration Endpoint
+
+## POST /captain/register
+
+### Description
+This endpoint is used to register a new captain.
+
+### Request Body
+The request body should be a JSON object containing the following fields:
+
+- `fullname`: An object containing:
+  - `firstname` (string, required): The first name of the captain. Must be at least 3 characters long.
+  - `lastname` (string, required): The last name of the captain. Must be at least 3 characters long.
+- `email` (string, required): The email address of the captain. Must be a valid email format.
+- `password` (string, required): The password for the captain account. Must be at least 6 characters long.
+- `vehicle`: An object containing:
+  - `color` (string, required): The color of the vehicle. Must be at least 3 characters long.
+  - `plate` (string, required): The plate number of the vehicle. Must be at least 3 characters long.
+  - `capacity` (number, required): The capacity of the vehicle. Must be at least 1.
+  - `vehicleType` (string, required): The type of the vehicle. Must be one of `car`, `motorcycle`, or `auto`.
+
+### Example Request
+```json
+{
+  "fullname": {
+    "firstname": "Jane",
+    "lastname": "Doe"
+  },
+  "email": "jane.doe@example.com",
+  "password": "password123",
+  "vehicle": {
+    "color": "red",
+    "plate": "ABC123",
+    "capacity": 4,
+    "vehicleType": "car"
+  }
+}
+```
+
+### Responses
+
+#### Success
+- **Status Code**: 201 Created
+- **Response Body**:
+  ```json
+  {
+    "token": "jwt-token",
+    "captain": {
+      "_id": "captain-id",
+      "fullname": {
+        "firstname": "Jane",
+        "lastname": "Doe"
+      },
+      "email": "jane.doe@example.com",
+      "vehicle": {
+        "color": "red",
+        "plate": "ABC123",
+        "capacity": 4,
+        "vehicleType": "car"
+      }
+    }
+  }
+  ```
+
+#### Validation Errors
+- **Status Code**: 400 Bad Request
+- **Response Body**:
+  ```json
+  {
+    "errors": [
+      {
+        "msg": "Invalid Email",
+        "param": "email",
+        "location": "body"
+      },
+      {
+        "msg": "First name should be at least 3 characters",
+        "param": "fullname.firstname",
+        "location": "body"
+      },
+      {
+        "msg": "Password should be at least 6 characters",
+        "param": "password",
+        "location": "body"
+      },
+      {
+        "msg": "Color should be at least 3 characters",
+        "param": "vehicle.color",
+        "location": "body"
+      },
+      {
+        "msg": "Plate should be at least 3 characters",
+        "param": "vehicle.plate",
+        "location": "body"
+      },
+      {
+        "msg": "Capacity should be at least 1",
+        "param": "vehicle.capacity",
+        "location": "body"
+      },
+      {
+        "msg": "Invalid vehicle type",
+        "param": "vehicle.vehicleType",
+        "location": "body"
+      }
+    ]
+  }
+  ```
+
+#### Captain Already Exists
+- **Status Code**: 400 Bad Request
+- **Response Body**:
+  ```json
+  {
+    "message": "Captain already exist"
+  }
+  ```
