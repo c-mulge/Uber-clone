@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -20,7 +21,7 @@ const CaptainLogin = () => {
             <form onSubmit={(e)=>{
                 submitHandler(e)
             }}>
-                <h3 className='text-lg font-medium mb-2'>What's your email?</h3>
+                <h3 className='text-lg font-medium mb-2'>Whats your email?</h3>
 
                 <input 
                 required 
